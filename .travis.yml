@@ -7,5 +7,10 @@ language:
 python:
   - "3.3"
 
+matrix:
+  include:
+    - os: linux
+    - os: osx
+
 script:
   - python ./test.py
