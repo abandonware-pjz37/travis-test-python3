@@ -1,11 +1,22 @@
 sudo:
   - false
 
-language:
-  - python
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - python3
 
-python:
-  - "3.3"
+      # python3-pip package is not available, use 'easy_install3':
+      # * https://github.com/travis-ci/apt-package-whitelist/issues/768
+      - python3-setuptools # easy_install3
+
+      # https://github.com/travis-ci-tester/travis-test-clang-cxx-11
+      - libstdc++-4.8-dev
+
+      # https://github.com/travis-ci-tester/travis-test-gcc-cxx-11
+      - g++-4.8
 
 matrix:
   include:
@@ -13,4 +24,5 @@ matrix:
     - os: osx
 
 script:
+  - python --version
   - python ./test.py
